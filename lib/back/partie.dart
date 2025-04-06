@@ -66,16 +66,6 @@ class Partie {
   Future<void> supprimerPartie() async{
     print("Partie : supprimerPartie()");
     await supprimerJoueurs();
-    if (_circuitID!.length!=0) {
-      final ref = FirebaseFirestore.instance.collection("circuit").doc(
-          _circuitID).withConverter(
-        fromFirestore: Circuit.fromFirestore,
-        toFirestore: (Circuit circuit, _) => circuit.toFirestore(),
-      );
-      final docSnap = await ref.get();
-      Circuit? circuit = docSnap.data();
-      circuit!.supprimerCircuit();
-    }
     FirebaseFirestore.instance.collection("partie").doc(_partieID).delete().then(
           (doc) => print("Document deleted"),
       onError: (e) => print("Error updating document $e"),

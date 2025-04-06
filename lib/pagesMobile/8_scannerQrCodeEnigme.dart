@@ -57,7 +57,6 @@ class _Page8State extends State<Page8> {
   Future<void> verifPointPassage(String idPointPassageNonVerifier) async {
     if (_circuit.getOrdrePointPassage()){
       if (_circuit.getLstPointPassage()![0]==idPointPassageNonVerifier){
-        print("verifPointPassage : " + idPointPassageNonVerifier);
         final ref = FirebaseFirestore.instance
             .collection("pointPassage")
             .doc(idPointPassageNonVerifier)
@@ -70,13 +69,10 @@ class _Page8State extends State<Page8> {
         setState(() {
           _pointPassage = docSnap.data();
         });
-        print("_pointPassage!.getNom()" + _pointPassage!.getNom()!);
 
         if (_pointPassage != null) {
-          print("if successfull _pointPassage non null");
           print(_pointPassage!.getEnigme());
           if (_pointPassage!.getEnigme()!.length == 0) {
-            print("_pointPassage!.getEnigme()!.length==0");
             _result = "";
             Navigator.pushReplacement(
                 context,
@@ -94,6 +90,44 @@ class _Page8State extends State<Page8> {
           }
         }
       }
+    }else{
+      List<dynamic> listPointPassage = _circuit.getLstPointPassage()!;
+      for (int i=0; i<listPointPassage.length; i++){
+        if (listPointPassage[i]==idPointPassageNonVerifier){
+          final ref = FirebaseFirestore.instance
+              .collection("pointPassage")
+              .doc(idPointPassageNonVerifier)
+              .withConverter(
+            fromFirestore: PointPassage.fromFirestore,
+            toFirestore: (PointPassage pointPassage, _) =>
+                pointPassage.toFirestore(),
+          );
+          final docSnap = await ref.get();
+          setState(() {
+            _pointPassage = docSnap.data();
+          });
+
+          if (_pointPassage != null) {
+            print(_pointPassage!.getEnigme());
+            if (_pointPassage!.getEnigme()!.length == 0) {
+              _result = "";
+              Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => Page11(
+                        circuit: _circuit,
+                        pointPassage: _pointPassage!,
+                        idPartie: _idPartie,
+                        nom: _nom,
+                      )) // Navigation
+              );
+            } else {
+              recupererEnigme();
+            }
+          }
+        }
+      }
+
     }
   }
 
