@@ -354,7 +354,7 @@ class _CircuitCreationCircuitState extends State<CircuitCreationCircuit> {
                           activeColor: vertMoyen,
                         ),
                         Text(
-                          "Ajouter un ordre aux Points de Passages",
+                          "Ajouter un ordre aux Points de Passage",
                           style: TextStyle(
                             fontSize: 16,
                             color: Color(0xFF4b8c72),
@@ -391,7 +391,7 @@ class _CircuitCreationCircuitState extends State<CircuitCreationCircuit> {
                             Icon(Icons.swap_vert,
                                 color: Colors.white),
                             SizedBox(width: 8),
-                            Text("Modifier l'ordre des Points de Passages",
+                            Text("Modifier l'ordre des Points de Passage",
                                 style: TextStyle(color: Colors.white)),
                           ],
                         ),
