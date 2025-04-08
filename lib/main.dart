@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:tracks/firebase_options.dart';
-import 'package:tracks/pagesMobile/2_entrerPartie.dart';
+import 'package:tracks/pagesWeb/1_bienvenue.dart';
 
 
 
@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner:
       false, // Cette ligne désactive le bandeau debu
-      home: Page2(),
+      home: bienvenueWeb(),
     );
   }
 }
